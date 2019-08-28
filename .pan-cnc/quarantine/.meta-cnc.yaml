@@ -1,0 +1,60 @@
+# skillet preamble information used by panhandler
+# ---------------------------------------------------------------------
+# unique snippet name
+name: SkilletPurgatory
+# label used for menu selection
+label: Iron Box Auto-tagging & DNS Sinkhole [STEP-1] - Quarantine
+description: This skillet will autotag and isolate host(s) from the network that are identified as communicating with malicious domains. This skillet is designed to work with the IronBox edition of IronSkillet.
+
+# type of device configuration
+# common types are panorama, panos, and template
+# https://github.com/PaloAltoNetworks/panhandler/blob/develop/docs/metadata_configuration.rst
+type: python3
+# preload static or default-based templates
+extends:
+
+# grouping of like snippets for dynamic menu creation in panhandler
+labels:
+  collection:
+    - IronBox AutoTag Sinkhole Demo
+
+# ---------------------------------------------------------------------
+# end of preamble section
+
+# variables section
+# ---------------------------------------------------------------------
+# variables used in the configuration templates
+# type_hint defines the form field used by panhandler
+# type_hints can be text, ip_address, or dropdown
+variables:
+  - name: TARGET_IP
+    description: IP address or FQDN or the NGFW
+    default: 192.168.55.10
+    type_hint: IP or FQDN
+  - name: TARGET_USERNAME
+    description: NGFW Username
+    type_hint: text
+  - name: TARGET_PASSWORD
+    description: NGFW Password
+    type_hint: The password to the NGFW
+  - name: log_forwarding
+    description: Name of the Log Forwarding Profile to autotag infected hosts
+    default: LFP-Quarantine
+    type_hint: text
+  - name: DAG
+    description: Name of the Dynamic Address Group for the infected hosts
+    default: QuarantinedHosts
+    type_hint: text
+
+# ---------------------------------------------------------------------
+# end of variables section
+
+# snippets section
+# ---------------------------------------------------------------------
+# snippets used for api configuration including xpath and element as file name
+# files will load in the order listed
+snippets:
+  - name: script
+    file: ../../packetpurgatory.py
+# ---------------------------------------------------------------------
+# end of snippets section

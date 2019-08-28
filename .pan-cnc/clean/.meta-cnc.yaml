@@ -1,0 +1,71 @@
+# skillet preamble information used by panhandler
+# ---------------------------------------------------------------------
+# unique snippet name
+name: UNSkilletPurgatory
+# label used for menu selection
+label: IronBox Auto-tagging & DNS Sinkhole [STEP-2] - Override
+description: This skillet will notify the user of malicious activity detected on their machine and provide an override to be self-service. This skillet is designed to work with the IronBox Lab in a Box IronSkillet.
+
+# type of device configuration
+# common types are panorama, panos, and template
+# https://github.com/PaloAltoNetworks/panhandler/blob/develop/docs/metadata_configuration.rst
+type: python3
+# preload static or default-based templates
+extends:
+
+# grouping of like snippets for dynamic menu creation in panhandler
+labels:
+  collection:
+    - IronBox AutoTag Sinkhole Demo
+
+# ---------------------------------------------------------------------
+# end of preamble section
+
+# variables section
+# ---------------------------------------------------------------------
+# variables used in the configuration templates
+# type_hint defines the form field used by panhandler
+# type_hints can be text, ip_address, or dropdown
+variables:
+  - name: TARGET_IP
+    description: IP address or FQDN or the NGFW
+    type_hint: IP or FQDN
+  - name: TARGET_USERNAME
+    description: NGFW Username
+    type_hint: text
+  - name: TARGET_PASSWORD
+    description: NGFW Password
+    type_hint: The password to the NGFW
+  - name: url_forwarding
+    description: Name of Log Forwarding Profile to be created to untag hosts
+    default: LFP-URL
+  - name: url_profile
+    description: Provide a name for the URL Filtering security profile
+    default: UNQuarantine
+    type_hint: text
+  - name: url_custom
+    description: Choose whether you want the default or a custom URL Override page to be displayed on the host
+    default: Default URL Override Page
+    type_hint: dropdown
+    dd_list:
+      - key: Custom URL Override Page
+        value: custom
+      - key: Default URL Override Page
+        value: default
+  - name: DAG
+    description: Name of the Dynamic Address Group for the infected hosts used in Step-1
+    default: QuarantinedHosts
+    type_hint: text
+
+# ---------------------------------------------------------------------
+# end of variables section
+
+# snippets section
+# ---------------------------------------------------------------------
+# snippets used for api configuration including xpath and element as file name
+# files will load in the order listed
+snippets:
+  - name: script
+    file: ../../happypackets.py
+# ---------------------------------------------------------------------
+# end of snippets section

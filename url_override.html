@@ -1,0 +1,84 @@
+<html>
+<body bgcolor="black">
+<head>
+<title>Web Page Blocked</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<META HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE">
+<meta name="viewport" content="initial-scale=1.0">
+<style>
+div.transbox {
+  margin: 30px;
+  background-color: #ffffff;
+  border: 2px solid black;
+  opacity: 0.6;
+  filter: alpha(opacity=60); /* For IE8 and earlier */
+}
+
+  body {
+    font-family: monospace;
+    color:#000000;
+    font-weight:bold;
+    font-size: 21px;
+  }
+
+  #content {
+    max-width: 900px !important;
+    margin: 0 auto;
+    text-align: left;
+  }
+
+  h1 {
+    font-family: Impact;
+    font-size:72;
+    font-weight:bold;
+    color:#FF0000;
+  }
+  b {
+    font-weight:normal;
+    color:#cc0000;
+  }
+
+  span.block {
+    display: inline-block;
+    text-align: center;
+    width: 33%;
+    vertical-align: top;
+  }
+        form td, form input {
+                font-size: 20px;
+                padding: 15px;
+                font-weight: bold;
+        }
+        #formdiv {
+                margin-left: auto;
+                margin-right: auto;
+                border: none;
+        }
+</style>
+<div class="transbox">
+<script type="text/javascript">
+function pwdCheck() {
+    if(document.getElementById("pwd")) {
+        document.getElementById("continueText").innerHTML = "Please contact the Systems Administrator to investigate your machine and enter the override password here:";
+    }
+}
+</script>
+</head>
+<div id="content">
+<h1 align="center">WARNING!</h1>
+<p>Your system has been quarantined due to malicious activity being detected. </p>
+<p><b>User:</b> <user/> </p>
+<p><b>URL:</b> <url/> </p>
+<p><b>Category:</b> <category/> </p>
+
+<hr>
+<p id="continueText">If you feel this page has been incorrectly blocked, you may click Continue to proceed to the page. However, this action will be logged.</p>
+<div id="formdiv">
+    <pan_form/>
+
+</div>
+</div>
+<a href="#" onclick="history.back();return false;">Return to previous page</a>
+</div>
+</body>
+</html>
